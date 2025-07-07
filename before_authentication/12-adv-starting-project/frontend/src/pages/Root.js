@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import { MainNavigator } from "./components/MainNavigation.js";
+import MainNavigation from "../components/MainNavigation.js";
 
 function RootLayOut() {
   return (
     <>
-      <MainNavigator></MainNavigator>
+      <MainNavigation></MainNavigation>
       <main>
         <Outlet></Outlet>
       </main>

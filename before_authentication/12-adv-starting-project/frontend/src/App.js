@@ -15,46 +15,43 @@
 // 3. Add a root layout that adds the <MainNavigation> component above all page components
 
 // 4. Add properly working links to the MainNavigation
+
 // 5. Ensure that the links in MainNavigation receive an "active" class when active
+
 // 6. Output a list of dummy events to the EventsPage
 //    Every list item should include a link to the respective EventDetailPage
+
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { RootLayOut } from "./pages/Root.js";
-import { HomePage } from "./pages/HomePage.js";
-import { EventPage } from "./pages/EventsPage.js";
-import { EventDetail } from "./pages/EventDetailPage.js";
-import { NewEventPage } from "./pages/NewEventPage.js";
-import { EditEventPage } from "./pages/EditEventPage.js";
+import RootLayOut from "./pages/Root.js";
+import HomePage from "./pages/HomePage.js";
+import EventPage from "./pages/EventsPage.js";
+import EventDetail from "./pages/EventDetailPage.js";
+import NewEventPage from "./pages/NewEventPage.js";
+import EditEventPage from "./pages/EditEventPage.js";
 
 const route = createBrowserRouter([
   {
     path: "/",
-    elements: <RootLayOut></RootLayOut>,
+    element: <RootLayOut></RootLayOut>,
     children: [
-      { path: "/", elements: <HomePage></HomePage> },
-      { path: "/Events", elements: <EventPage></EventPage> },
-      { path: "/Events/:EventId", elements: <EventDetail></EventDetail> },
-      { path: "/Events/new", elements: <NewEventPage></NewEventPage> },
+      { path: "/", element: <HomePage></HomePage> },
+      { path: "/events", element: <EventPage></EventPage> },
+      { path: "/events/:eventId", element: <EventDetail></EventDetail> },
+      { path: "/events/new", element: <NewEventPage></NewEventPage> },
       {
-        path: "/Events/:EventId/edit",
-        elements: <EditEventPage></EditEventPage>,
+        path: "/events/:eventId/edit",
+        element: <EditEventPage></EditEventPage>,
       },
     ],
   },
 ]);
 
 function App() {
-  return (
-    <div>
-      <h1>
-        <RouterProvider route={route} />
-      </h1>
-    </div>
-  );
+  return <RouterProvider router={route} />;
 }
 
 export default App;

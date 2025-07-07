@@ -1,4 +1,5 @@
-import classes from './EventsList.module.css';
+import classes from "./EventsList.module.css";
+import EventItem from "./EventItem.js";
 
 function EventsList({ events }) {
   return (
@@ -7,13 +8,7 @@ function EventsList({ events }) {
       <ul className={classes.list}>
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
-            <a href="...">
-              <img src={event.image} alt={event.title} />
-              <div className={classes.content}>
-                <h2>{event.title}</h2>
-                <time>{event.date}</time>
-              </div>
-            </a>
+            <EventItem event={event}></EventItem>
           </li>
         ))}
       </ul>

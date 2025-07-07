@@ -1,5 +1,11 @@
+import MainNavigation from "../components/MainNavigation.js";
+
 function HomePage() {
-  <h1>Wello.</h1>;
+  return (
+    <>
+      <h1>Welcome to Homepage.</h1>
+    </>
+  );
 }
 
 export default HomePage;

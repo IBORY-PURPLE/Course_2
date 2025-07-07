@@ -13,7 +13,9 @@ function MainNavigation() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-            ></NavLink>
+            >
+              Home
+            </NavLink>
           </li>
           <li>
             <NavLink
@@ -21,7 +23,9 @@ function MainNavigation() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-            ></NavLink>
+            >
+              events
+            </NavLink>
           </li>
         </ul>
       </nav>
