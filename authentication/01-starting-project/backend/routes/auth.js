@@ -9,6 +9,8 @@ router.post("/signup", async (req, res, next) => {
   const data = req.body;
   let errors = {};
 
+  console.log("userName", req.body.userName);
+
   if (!isValidEmail(data.email)) {
     errors.email = "Invalid email.";
   } else {

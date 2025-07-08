@@ -1,34 +1,13 @@
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import EventsList from "../components/EventsList.js";
 
 function EventPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [fetchedEvents, setFetchedEvents] = useState();
-  const [error, setError] = useState();
-
-  useEffect(() => {
-    async function fetchEvents() {
-      setIsLoading(true);
-      const response = await fetch("http://localhost:8080/events");
-      if (!response.ok) {
-        setError("Fetching events failed.");
-      } else {
-        const resData = await response.json();
-        setFetchedEvents(resData.events);
-      }
-      setIsLoading(false);
-    }
-
-    fetchEvents();
-  }, []);
+  // 이 컴포넌트를 호출한 라우터의 가장 가까운 loader의 값을 가져온다.
+  const events = useLoaderData();
   return (
     <>
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-      </div>
-      {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+      <EventsList events={events} />
     </>
   );
 }

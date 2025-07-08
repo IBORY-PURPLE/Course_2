@@ -28,7 +28,7 @@ function MainNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              Events
+              Stock
             </NavLink>
           </li>
           <li>
@@ -38,7 +38,7 @@ function MainNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              Newsletter
+              News
             </NavLink>
           </li>
           {!token && (

@@ -24,6 +24,7 @@ export async function action({ request }) {
   const authData = {
     email: data.get("email"),
     password: data.get("password"),
+    userName: data.get("userName"),
   };
 
   const response = await fetch("http://localhost:8080/" + mode, {
@@ -35,7 +36,7 @@ export async function action({ request }) {
   });
 
   // authform에서 useActionData 훅으로 오류를 폼 안에서 생성.
-  if (response.status === 422 || response.status == 401) {
+  if (response.status === 422 || response.status === 401) {
     return response;
   }
 
