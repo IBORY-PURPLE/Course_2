@@ -4,7 +4,7 @@ import {
   Link,
   useSearchParams,
   useActionData,
-  useNavigate,
+  // useNavigate,
   useNavigation,
 } from "react-router-dom";
 
@@ -19,6 +19,7 @@ function AuthForm() {
   const data = useActionData();
   const navigation = useNavigation();
 
+  // searchParams는 객체 ?키=값,키=값 이렇게
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get("mode") === "login";
   const isSubmitting = navigation.state === "submitting";
@@ -34,6 +35,12 @@ function AuthForm() {
           </ul>
         )}
         {data && data.message && <p>{data.message}</p>}
+        {!isLogin && (
+          <p>
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" name="userName" required />
+          </p>
+        )}
         <p>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" required />
