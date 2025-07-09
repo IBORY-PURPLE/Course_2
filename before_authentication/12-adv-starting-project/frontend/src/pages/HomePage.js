@@ -1,5 +1,3 @@
-import MainNavigation from "../components/MainNavigation.js";
-
 function HomePage() {
   return (
     <>

@@ -77,6 +77,7 @@ export async function loader({ request, params }) {
   });
 }
 
+// eventdetail페이지에서 이벤트 삭제를 위한 action함수.
 export async function action({ params, request }) {
   const eventId = params.eventId;
   const token = getAuthToken();

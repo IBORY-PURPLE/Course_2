@@ -29,16 +29,21 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root.js";
 import EventsRootLayout from "./pages/EventsRoot.js";
 
+import ErrorPage from "./pages/Error.js";
 import HomePage from "./pages/HomePage.js";
 import EventPage from "./pages/EventsPage.js";
-import EventDetail from "./pages/EventDetailPage.js";
+import EventDetail, {
+  loader as eventDetailLoader,
+} from "./pages/EventDetailPage.js";
 import NewEventPage from "./pages/NewEventPage.js";
 import EditEventPage from "./pages/EditEventPage.js";
 
+import { loader as EventsLoader } from "./pages/EventsPage.js";
 const route = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       { index: true, element: <HomePage></HomePage> },
       {
@@ -48,22 +53,24 @@ const route = createBrowserRouter([
           {
             index: true,
             element: <EventPage></EventPage>,
-            loader: async () => {
-              const response = await fetch("http://localhost:8080/events");
-              if (!response.ok) {
-                // ...
-              } else {
-                const resData = await response.json();
-                return resData.events;
-              }
-            },
+            loader: EventsLoader,
           },
-          { path: ":eventId", element: <EventDetail></EventDetail> },
-          { path: "new", element: <NewEventPage></NewEventPage> },
           {
-            path: ":eventId/edit",
-            element: <EditEventPage></EditEventPage>,
+            path: ":eventId",
+            id: "event-detail",
+            loader: eventDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <EventDetail></EventDetail>,
+              },
+              {
+                path: "edit",
+                element: <EditEventPage></EditEventPage>,
+              },
+            ],
           },
+          { path: "new", element: <NewEventPage></NewEventPage> },
         ],
       },
     ],
