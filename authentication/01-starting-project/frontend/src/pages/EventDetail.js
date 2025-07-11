@@ -12,11 +12,15 @@ import EventsList from "../components/EventsList";
 import { getAuthToken } from "../util/auth";
 
 function EventDetailPage() {
+  // 2. useRouteLoaderData는 이 페이지 코드에 있는 loader를 사용한 것이고 그 로더에서 반환한
+  // 2. defer(event, events)를 할당받는거지?
+  // 2. 그럼 밑에 loadedEvent는 event변수 하위에있는거야?
   const { event, events } = useRouteLoaderData("event-detail");
 
   return (
     <>
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+        {/* event로 온 값이 값이든 promise든 resolve(promise를 푼다)해서 데이터 전송 */}
         <Await resolve={event}>
           {(loadedEvent) => <EventItem event={loadedEvent} />}
         </Await>
@@ -71,6 +75,8 @@ async function loadEvents() {
 export async function loader({ request, params }) {
   const id = params.eventId;
 
+  // 1. loadEvent는 비동기 함수 호출 await으로 promise 리졸브해서 반환
+  // 2. loadEvents는 promise로 묶인 객체를 반환하는 아직 리졸브 안함 위에 await컴포넌트로 리졸브하고 데이터 전송.
   return defer({
     event: await loadEvent(id),
     events: loadEvents(),
